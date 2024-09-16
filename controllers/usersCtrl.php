@@ -106,7 +106,7 @@ class UserController extends User
 			$user = $this->GetUserLogin($email);
 			if ($user != null) {
 				if ($user['status'] == 'active') {
-					if (password_verify($password, $user['password'])) {
+					if (password_verify($password, $user['motDePasse'])) {
 						$userInfo = [
 							'id' => $user['id'],
 							'userName' => $user['userName'],

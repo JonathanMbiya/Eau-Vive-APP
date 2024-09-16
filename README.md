@@ -21,6 +21,13 @@ npm install
 npm run php-install
 ```
 
+## Setup
+
+- Install DB
+1. Create data base with name : db-stock
+2. Import db-stock.sql
+3. Execute SQL Script in users.sql
+
 ## Development
 
 3. Start the development server, just run the following command:
@@ -31,3 +38,7 @@ npm run dev
 
 Now you can access your application. Once the server is running, you can access your application by navigating to http://localhost:3000/login in your web browser.
 
+## Login
+
+- username : katmj@gmail.com
+- password : 1234

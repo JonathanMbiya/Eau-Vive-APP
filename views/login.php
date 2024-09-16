@@ -1,6 +1,9 @@
 <?php
 require('system/main.php');
 
+if (isset($_SESSION['isLogin']) && $_SESSION['isLogin'] == "true") {
+	header("location:/app");
+}
 $layout = new HTML(title: 'Login Form');
 ?>
 

@@ -22,10 +22,13 @@ if (!empty($_REQUEST['action_type']) && $_REQUEST['action_type'] == 'login-user'
 		$_SESSION['isLogin'] = "false";
 		echo $val['message'];
 	}
+} else if (!empty($_REQUEST['action_type']) && $_REQUEST['action_type'] == 'logout') {
+	if (session_destroy())
+		$redirectURL = '/login';
 }
 
 echo $redirectURL;
 
 
-// header("Location: $redirectURL");
-// exit;
+header("Location: $redirectURL");
+exit;

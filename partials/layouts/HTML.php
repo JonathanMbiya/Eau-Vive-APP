@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 class HTML
 {
 	public function __construct(public string $title, public string $lang = 'en')

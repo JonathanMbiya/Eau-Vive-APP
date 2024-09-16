@@ -44,7 +44,7 @@ class User extends AppGlobalModel
 	public function GetUser($id)
 	{
 		return $this->getDatas($this->tableName, [
-			'select' => 'id,nomProduit,categorie, quantite, prixUnitaire, datePeremption, sensibiliteChaleur, estCouteux, status, createAt, updateAt',
+			'select' => 'id,email',
 			'where' => [
 				'id' => $id,
 				"status" => "active"

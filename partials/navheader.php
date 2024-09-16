@@ -142,8 +142,7 @@
 
 				<div class="flex items-center ml-3">
 					<div>
-						<button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
-							<span class="sr-only">Open user menu</span>
+						<button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2" aria-label="Show menu user">
 							<img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
 						</button>
 					</div>
@@ -151,10 +150,10 @@
 					<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-2" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1305px, 61px);">
 						<div class="px-4 py-3" role="none">
 							<p class="text-sm text-gray-900 dark:text-white" role="none">
-								Neil Sims
+								Johndoe
 							</p>
 							<p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-								neil.sims@flowbite.com
+								doe@gmail.com
 							</p>
 						</div>
 						<ul class="py-1" role="none">
@@ -165,10 +164,12 @@
 								<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
 							</li>
 							<li>
-								<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
-							</li>
-							<li>
-								<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+								<form action="/user/action" method="POST" class="w-full flex">
+									<input type="hidden" name="action_type" value="logout">
+									<button class="block w-full px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:text-red-500 dark:hover:bg-red-950/40 dark:hover:text-red-400" role="menuitem">
+										Deconnexion
+									</button>
+								</form>
 							</li>
 						</ul>
 					</div>
