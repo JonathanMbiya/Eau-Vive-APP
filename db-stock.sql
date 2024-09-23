@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 16 sep. 2024 à 12:51
+-- Généré le : lun. 23 sep. 2024 à 22:29
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -44,6 +44,21 @@ CREATE TABLE `detailfactures` (
   `id` int(11) NOT NULL,
   `idFacture` int(11) NOT NULL,
   `idProduit` int(11) NOT NULL,
+  `prix` int(11) NOT NULL,
+  `quantite` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `detail_inventaires`
+--
+
+CREATE TABLE `detail_inventaires` (
+  `id` int(11) NOT NULL,
+  `idInventaire` int(11) NOT NULL,
+  `idProduit` int(11) NOT NULL,
+  `prix` int(11) NOT NULL,
   `quantite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -56,7 +71,23 @@ CREATE TABLE `detailfactures` (
 CREATE TABLE `factures` (
   `id` int(11) NOT NULL,
   `dateFacture` date NOT NULL,
-  `montantTotal` float NOT NULL
+  `montantTotal` float NOT NULL,
+  `createAt` date NOT NULL,
+  `updateAt` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `inventaires`
+--
+
+CREATE TABLE `inventaires` (
+  `id` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `dateInventaire` date NOT NULL,
+  `createAt` date NOT NULL,
+  `updateAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -67,10 +98,14 @@ CREATE TABLE `factures` (
 
 CREATE TABLE `mouvementstock` (
   `id` int(11) NOT NULL,
+  `idProduit` int(11) NOT NULL,
   `typeMouvement` varchar(10) NOT NULL,
   `dateMouvement` date NOT NULL,
   `quantite` int(11) NOT NULL,
-  `raison` varchar(255) NOT NULL
+  `prix` decimal(11,0) NOT NULL,
+  `raison` varchar(255) NOT NULL,
+  `createAt` date NOT NULL,
+  `updateAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -91,6 +126,21 @@ CREATE TABLE `produits` (
   `status` varchar(10) NOT NULL,
   `createAt` date NOT NULL,
   `updateAt` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rapport_financiers`
+--
+
+CREATE TABLE `rapport_financiers` (
+  `id` int(11) NOT NULL,
+  `dateRapport` date NOT NULL,
+  `montantVente` decimal(10,0) NOT NULL,
+  `montantAchat` decimal(10,0) NOT NULL,
+  `du` date NOT NULL,
+  `au` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -127,9 +177,21 @@ ALTER TABLE `detailfactures`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `detail_inventaires`
+--
+ALTER TABLE `detail_inventaires`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `factures`
 --
 ALTER TABLE `factures`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `inventaires`
+--
+ALTER TABLE `inventaires`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -142,6 +204,12 @@ ALTER TABLE `mouvementstock`
 -- Index pour la table `produits`
 --
 ALTER TABLE `produits`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `rapport_financiers`
+--
+ALTER TABLE `rapport_financiers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -167,9 +235,21 @@ ALTER TABLE `detailfactures`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `detail_inventaires`
+--
+ALTER TABLE `detail_inventaires`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `factures`
 --
 ALTER TABLE `factures`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `inventaires`
+--
+ALTER TABLE `inventaires`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -182,6 +262,12 @@ ALTER TABLE `mouvementstock`
 -- AUTO_INCREMENT pour la table `produits`
 --
 ALTER TABLE `produits`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `rapport_financiers`
+--
+ALTER TABLE `rapport_financiers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
