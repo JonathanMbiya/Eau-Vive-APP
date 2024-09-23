@@ -23,14 +23,15 @@ if (substr($request, -1) === '/') {
 $indexFile = realpath("views/$request/index.php");
 $namedFile = realpath("views/$request.php");
 
+$error404 = realpath("views/404.php");
+
 try {
 	if (file_exists($indexFile)) {
 		die(include($indexFile));
 	} elseif (file_exists($namedFile)) {
 		die(include($namedFile));
 	}
-
-	throw new Exception("File '$request' not found", 404);
+	die(include($error404));
 } catch (\Throwable $th) {
-	die('Error: ' . $th->getMessage());
+	die(include($error404));
 }
