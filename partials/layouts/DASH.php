@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] == "false") {
 	header("location:/login");
 }
+include("controllers/appCtrl.php");
 class DASH
 {
 	public function __construct(public string $title, public string $lang = 'en')
@@ -45,7 +46,33 @@ class DASH
 			<title>Gestion Stock : <?= $this->title; ?></title>
 
 			<link href="/src/styles/global.scss" rel="stylesheet" />
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+			<script>
+				const docEl = document.documentElement;
+				const getThemePreference = () => {
+					if (typeof localStorage !== "undefined" && localStorage.getItem("color-theme")) {
+						return localStorage.getItem("color-theme");
+					}
+					return window.matchMedia("(prefers-color-scheme: dark)").matches ?
+						"dark" :
+						"light";
+				};
+				const isDark = getThemePreference() === "dark";
+				docEl.classList[isDark ? "add" : "remove"]("dark");
 
+				if (typeof localStorage !== "undefined") {
+					const observer = new MutationObserver(() => {
+						const isDark = docEl.classList.contains("dark");
+						localStorage.setItem("color-theme", isDark ? "dark" : "light");
+					});
+					observer.observe(docEl, {
+						attributes: true,
+						attributeFilter: ["class"],
+					});
+				}
+			</script>
 		</head>
 
 		<body class="min-h-dvh w-full bg-gray-50 dark:bg-gray-950">
