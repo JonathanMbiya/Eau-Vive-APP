@@ -16,14 +16,14 @@ class AppGlobalModel extends DataBase
 
 	public function valExist($tableName, $whereCond, $columns)
 	{
-		return $this->getDatas($tableName, [
+		return !empty($this->getDatas($tableName, [
 			'select' => $columns,
 			'where' => $whereCond,
 			'return_type' => 'single'
-		]);
+		]));
 	}
 
-	public function insert($table, $data)
+	public function insert($table, $data, $withDate = true)
 	{
 		try {
 			if (!empty($data) && is_array($data)) {
@@ -31,10 +31,10 @@ class AppGlobalModel extends DataBase
 				$values  = '';
 				$i = 0;
 
-				if (!array_key_exists('createAt', $data)) {
+				if ($withDate && !array_key_exists('createAt', $data)) {
 					$data['createAt'] = date("Y-m-d H:i:s");
 				}
-				if (!array_key_exists('updateAt', $data)) {
+				if ($withDate && !array_key_exists('updateAt', $data)) {
 					$data['updateAt'] = date("Y-m-d H:i:s");
 				}
 				foreach ($data as $key => $val) {
@@ -243,7 +243,10 @@ class AppGlobalModel extends DataBase
 		$query->execute();
 
 		if ($returnType != 'all') {
-			$data = $query->fetch(PDO::FETCH_ASSOC);
+			if ($returnType == "single")
+				$data = $query->fetch(PDO::FETCH_ASSOC);
+			elseif ($returnType == "count")
+				$data = $query->rowCount();
 		} else {
 			if ($query->rowCount() > 0) {
 				$data = $query->fetchAll();
