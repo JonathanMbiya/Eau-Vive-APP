@@ -34,12 +34,13 @@ class Product extends AppGlobalModel
 		]);
 	}
 
-	public function productExist($name)
+	public function productExist($name, $column = "nomProduit")
 	{
 		return $this->valExist($this->tableName, [
-			'nomProduit' => $name
+			$column => $name
 		], 'id,categorie');
 	}
+
 
 	public function GetProduct($id)
 	{
@@ -70,8 +71,43 @@ class Product extends AppGlobalModel
 		$data = $this->getDataWithSql($sql, "single");
 		return !empty($data);
 	}
-	public function getExpiredProducts() {
+	public function getExpiredProducts()
+	{
 		$sql = "SELECT * FROM " . $this->tableName . " WHERE `datePeremption` < CURDATE() AND `status` = 'active'";
 		return $this->getDataWithSql($sql, "all");
+	}
+
+	public function getCountExpiredProduct()
+	{
+		$sql = "SELECT * FROM " . $this->tableName . " WHERE `datePeremption` < CURDATE() AND `status` = 'active'";
+		return $this->getDataWithSql($sql, "count");
+	}
+
+
+	public function GetWillExpireIn1Week()
+	{
+		$sql = "SELECT * FROM " . $this->tableName . " WHERE datePeremption BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)  AND `status` = 'active'";
+		return $this->getDataWithSql($sql, "count");
+	}
+
+	public function GetProductsCount()
+	{
+		return $this->getDatas($this->tableName, [
+			'where' => [
+				"status" => "active"
+			],
+			"return_type" => "count"
+		]);
+	}
+
+	public function GetQuantityIs0()
+	{
+		return $this->getDatas($this->tableName, [
+			'where' => [
+				"quantite"=>0,
+				"status" => "active"
+			],
+			"return_type" => "count"
+		]);
 	}
 }
