@@ -9,7 +9,7 @@ $layout = new DASH(title: 'Editer Produit');
 if (isset($_GET['id'])) {
 
 
-	if ($_GET['id'] == $product['id']) {
+	if (!empty($product)) {
 ?>
 
 		<div class="flex flex-col items-center gap-10 text-gray-700 dark:text-gray-300 w-full">

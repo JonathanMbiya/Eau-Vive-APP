@@ -1,11 +1,30 @@
 <?php
 require('system/dash.php');
 
-$layout = new DASH(title: 'Gestion Stock');
+$layout = new DASH(title: 'Mouvement Stock');
 ?>
 
-<div class="flex flex-col items-center gap-10 text-2xl">
-
-List
-	<div id="repos" class="text-base flex gap-10"></div>
+<div class="flex flex-col items-center gap-10 text-gray-700 dark:text-gray-300 w-full">
+	<?php
+	include("partials/pageheadermain.php");
+	renderHeaderMain('Mouvement Stock', 'Liste de tous les mouvement de stock', [
+		'text' => '+ Nouveau',
+		'href' => '/app/mouvement-stock/nouveau'
+	], [
+		[
+			'href' => '/app',
+			'text' => 'Dashboard'
+		],
+		[
+			'text' => 'Liste Mouvement',
+			'isActive' => true
+		]
+	]);
+	?>
+	<div class="mt-5 flex flex-col w-full">
+		<?php
+		include('partials/render/mvmStockLst.php');
+		renderMouvementList();
+		?>
+	</div>
 </div>

@@ -12,8 +12,8 @@ $layout = new DASH(title: 'Liste Produits');
 		'href' => '/app/produits/nouveau'
 	], [
 		[
-			'href' => 'Dashboard',
-			'text' => '/app'
+			'href' => '/app',
+			'text' => 'Dashboard'
 		],
 		[
 			'text' => 'Liste Produits',
