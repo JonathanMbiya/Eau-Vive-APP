@@ -44,4 +44,27 @@ class Rapport extends AppGlobalModel
 
 		return $query->fetch(PDO::FETCH_ASSOC);
 	}
+
+	public function getAllMouvements($startDate, $endDate)
+{
+    $sql = "
+        SELECT
+            ms.dateMouvement,
+            ms.typeMouvement,
+            ms.quantite,
+            ms.prix,
+            p.nomProduit
+        FROM mouvementstock ms
+        JOIN produits p ON ms.idProduit = p.id
+        WHERE ms.dateMouvement BETWEEN :startDate AND :endDate
+        ORDER BY ms.dateMouvement DESC
+    ";
+    $query = $this::getConnexion()->prepare($sql);
+    $query->bindParam(':startDate', $startDate);
+    $query->bindParam(':endDate', $endDate);
+    $query->execute();
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }

@@ -15,9 +15,10 @@ class RapportController extends Rapport
 			$dateRapport = !empty($post['dateRapport']) ? $post['dateRapport'] : '';
 			$startDate = !empty($post["du"]) ? trim($post['du']) : '';
 			$endDate = !empty($post["au"]) ? trim($post['au']) : '';
-			$amountAchat = !empty($post['totalAmountOut']) ? trim($post["totalAmountOut"]) : '0';
-			$amouventVente = !empty($post['totalAmountIn']) ? trim($post["totalAmountIn"]) : '0';
-
+			 // Appel à getInventory pour récupérer les montants
+			 $inventoryData = $this->getInventory($startDate, $endDate);
+			 $amountAchat = $inventoryData['totalAmountIn'] ?? 0;  // Montant d'achat
+			 $amountVente = $inventoryData['totalAmountOut'] ?? 0;    // Montant de vente
 			$valErr = '';
 			if (empty($dateRapport)) {
 				$valErr .= "La date du rapport est obligatoire";
@@ -33,7 +34,7 @@ class RapportController extends Rapport
 					"dateRapport" => $dateRapport,
 					"du" => $startDate,
 					"au" => $endDate,
-					"montantVente" => $amouventVente,
+					"montantVente" => $amountVente,
 					"montantAchat" => $amountAchat
 				];
 				if ($this->rapportExist($startDate, $endDate)) {

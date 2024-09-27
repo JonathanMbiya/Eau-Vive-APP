@@ -6,7 +6,7 @@ function renderProductList()
 	include('components/badge.php');
 	$productOp = new Product();
 	$products = $productOp->GetProducts();
-	$columns = ["#", "Nom Produit", "Categorie", "Prix", "Quantite", "Sensibilite Chaleur", ''];
+	$columns = ["#", "Nom Produit", "Classe Therapeutique" ,"PrixUnitaire", "PrixAchat","Quantite", "Sensibilite Chaleur", ''];
 	if (!empty($products)) {
 ?>
 		<div class="overflow-hidden overflow-x-auto w-full">
@@ -38,20 +38,24 @@ function renderProductList()
 							<td>
 								<div class="flex gap-x-4">
 									<?php
-									if ($productOp->productIsExpired($product['id'])) {
-										badge('Expire', 'danger');
-									} else {
-										badge('Normal', 'success');
-									}
+									// if ($productOp->productIsExpired($product['id'])) {
+									// 	badge('Expire', 'danger');
+									// } else {
+									// 	badge('Normal', 'success');
+									// }
 									?>
 									<?= $product['nomProduit'] ?>
 								</div>
 							</td>
 							<td>
-								<?= $product['categorie'] ?>
+								<?= $product['classe_therapeutique'] ?>
 							</td>
+						
 							<td>
 								<?= $product['prixUnitaire'] ?>
+							</td>
+							<td>
+								<?= $product['prixAchat'] ?>
 							</td>
 							<td>
 								<?= $product['quantite'] ?>
@@ -64,6 +68,8 @@ function renderProductList()
 									badge('Non', 'success');
 								}
 								?>
+							</td>
+							
 							</td>
 							<td class="w-max">
 								<div class="flex">

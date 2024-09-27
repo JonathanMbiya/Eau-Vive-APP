@@ -10,6 +10,7 @@ if (isset($_GET['startDate'], $_GET['endDate'])) {
 	$date2 = $_GET['endDate'];
 	$inventoryOp = new RapportController();
 	$inventory = $inventoryOp->getInventory($date1, $date2);
+	//$inventory = $inventoryOp->getAll
 
 	if (!empty($inventory)) {
 ?>

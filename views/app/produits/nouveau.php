@@ -31,10 +31,29 @@ $layout = new DASH(title: 'Nouveau Produits');
 				<div class="grid sm:grid-cols-2 gap-6">
 					<?php
 					include("components/form.php");
+					// Catégories sous la classe thérapeutique
+					$classes_therapeutiques = [
+						'antibiotique' => 'Antibiotique',
+						'antiviraux' => 'Antiviraux',
+						'antifongiques' => 'Antifongiques',
+						'anti-inflammatoires' => 'Anti-inflammatoires',
+						'analgesiques' => 'Analgésiques'
+					];
+
+					// Catégories sous la forme pharmaceutique
+					$formes_pharmaceutiques = [
+						'comprimes' => 'Comprimés',
+						'gélules' => 'Gélules',
+						'sirop' => 'Sirop',
+						'injection' => 'Injection',
+						'crème' => 'Crème'
+					];
 					inputFormGroupLabel('Nom Produit', 'text', 'nomProduit', 'nomProduit', 'Saisir nom produit', true);
-					inputFormGroupLabel('Categorie', 'text', 'categorie', 'categorie', 'Saisir categorie', true);
+					inputFormSelectGroupLabel('Classe Thérapeutique', 'classe_therapeutique', 'classe_therapeutique', 'Sélectionner une classe thérapeutique', $classes_therapeutiques, true);
+					inputFormSelectGroupLabel('Forme Pharmaceutique', 'forme_pharmaceutique', 'forme_pharmaceutique', 'Sélectionner une forme pharmaceutique', $formes_pharmaceutiques, true);
 					inputFormGroupLabel('Quantite', 'number', 'quantite', 'quantite', '0', true);
 					inputFormGroupLabel('Prix Unitaire', 'number', 'prixUnitaire', 'prixUnitaire', '0', true);
+					inputFormGroupLabel('Prix Vente', 'number', 'prixVente', 'prixVente', '0', true);
 					inputFormGroupLabel('Date Peremption', 'date', 'datePeremption', 'datePeremption', '12/12/2023', true);
 					inputHidden('action_type', 'new-product');
 					?>
@@ -47,9 +66,9 @@ $layout = new DASH(title: 'Nouveau Produits');
 						</div>
 						<div>
 							<?php
-							inputCheckbox('estCouteux', 'estCouteux');
+							inputCheckbox('SensibiliteLumiere', 'SensibiliteLumiere');
 							?>
-							<label for="estCouteux" class="text-sm font-medium text-gray-600 dark:text-gray-400">Est couteux</label>
+							<label for="SensibiliteLumiere" class="text-sm font-medium text-gray-600 dark:text-gray-400">Sensible a lumiere</label>
 						</div>
 					</div>
 

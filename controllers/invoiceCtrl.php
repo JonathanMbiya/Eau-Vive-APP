@@ -60,7 +60,7 @@ class FactureController extends Facture
 				$this->update(
 					'produits',
 					[
-						"quantite" => $newQte
+						//"quantite" => $newQte
 					],
 					[
 						'id' => $post['idProduit']

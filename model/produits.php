@@ -45,7 +45,7 @@ class Product extends AppGlobalModel
 	public function GetProduct($id)
 	{
 		return $this->getDatas($this->tableName, [
-			'select' => 'id,nomProduit,categorie, quantite, prixUnitaire, datePeremption, sensibiliteChaleur, estCouteux, status, createAt, updateAt',
+			'select' => 'id,nomProduit,categorie, quantite, prixUnitaire, prixAchat, datePeremption, sensibiliteChaleur, estCouteux, status, createAt, updateAt',
 			'where' => [
 				'id' => $id,
 				"status" => "active"
@@ -57,7 +57,7 @@ class Product extends AppGlobalModel
 	public function GetProductsByCategory($category)
 	{
 		return $this->getDatas($this->tableName, [
-			'select' => 'id,nomProduit,categorie, quantite, prixUnitaire, datePeremption, sensibiliteChaleur, estCouteux, status, createAt, updateAt',
+			'select' => 'id,nomProduit,categorie, quantite, prixUnitaire, prixAchat datePeremption, sensibiliteChaleur, estCouteux, status, createAt, updateAt',
 			'where' => [
 				'categorie' => $category,
 				"status" => "active"
